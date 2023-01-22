@@ -1,0 +1,51 @@
+@import url("../main.scss");
+
+.navegationPage{
+    width: 100%;
+    height: 50px;
+    border-radius: 17px 17px 0px 0px;
+    background-color: #fff;
+    padding: 6px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    gap: auto;
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+
+.Menu-option{
+    display: block;
+    width: 27px;
+    height: 27px;
+    filter: invert(31%) sepia(49%) saturate(1551%) hue-rotate(141deg) brightness(97%) contrast(86%);
+}
+
+.syle-menu{
+    padding-left: 7px;
+    width: 47px;
+    height: 17px;
+    font-family: "Inter-Medium";
+    font-size: 1em;
+    position: relative;
+}
+
+.syle-menu::before{
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 3px;
+    bottom: 0px;
+    left: -4px;
+    margin: auto;
+}

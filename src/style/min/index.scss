@@ -1,0 +1,155 @@
+@import url("../main.scss");
+
+.content-Product{
+    width: 100%;
+    height: auto;
+    min-height: (calc(100vh - 129px));
+    padding: 10px 10px 50px 10px;
+    box-sizing: border-box;
+    margin: 17px 0px auto;
+    overflow: hidden;
+
+    border-radius: 45px 0px 0px 0px;
+    background-color: #B8D7D5;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1.5em;
+}
+
+.listFilter{
+    width: 100%;
+    height: auto;
+    min-height: 35px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 5px auto;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 18px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.listFilter::-webkit-scrollbar {
+    display: none; 
+}
+
+.text-Filters{
+    font-size: 1.1em;
+    color: #000;
+    font-family: "Inter-Light";
+}
+
+.text-filterSelect{
+    font-size: 1.4em;
+    font-family: "Inter-Medium";
+    margin-top: -1px;
+}
+
+.box-Products{
+    width: 100%;
+    height: auto;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.showProduct{
+    max-width: 164px;
+    // min-width: 145px;
+    min-width: 164px;
+    width: 50%;
+    height: 193px;
+    overflow: hidden;
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 0px 15px 15px;
+}
+
+.imgContent{
+    width: 100%;
+    height: 106px;
+    border-radius: 0px 0px 6px 6px;
+    overflow: hidden;
+    background-color: rgb(243, 243, 243);
+}
+
+.imgContent img{
+    width: 100%;
+    height: 100%;
+}
+
+.Informations-Product{
+    width: 100%;
+    height: auto;
+    margin: 7px auto;
+    padding: 0px 5px 0px 5px;
+}
+
+.text-NameProduct{
+    font-size: .95em;
+    color: #292929;
+    font-family: "Inter-Medium";
+    font-style: italic;
+}
+
+.box-information{
+    width: 100%;
+    height: auto;
+    margin: 8px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 7px;
+}
+
+.box-showInformation{
+    width: 55px;
+    height: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.box-showInformation img{
+    width: 12px;
+    height: 12px;
+}
+
+.text-information{
+    font-family: "Inter-ExtraLight";
+    font-size: .7em;
+    color: #1a1a1a;
+    margin-top: 1px;
+}
+
+.style-clock *{
+    filter: invert(59%) sepia(24%) saturate(6712%) hue-rotate(121deg) brightness(97%) contrast(95%);
+}
+
+.style-appraisal *{
+    filter: invert(45%) sepia(62%) saturate(958%) hue-rotate(329deg) brightness(88%) contrast(93%);
+}
+
+.text-value{
+    font-size: .8em;
+    font-family: "Inter-Medium";
+    color: #292929;
+}

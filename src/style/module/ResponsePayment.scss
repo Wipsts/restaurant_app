@@ -1,0 +1,254 @@
+@import "../default/variables.scss";
+
+.container-responsePayment{
+    width: 100%;
+    height: auto;
+    margin-top: 25px;
+    @include displayFlex(column, nowrap, center, center);
+    gap: 15px;
+    position: relative;
+}
+
+.container-card{
+    width: 100%;
+    height: auto;
+    background: #FBFBFB;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.style-ContainerCardSelect::before{
+    content: "\2713";
+    width: 17px;
+    height: 17px;
+    background-color: #DB8864;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+
+    position: absolute;
+    top: -4px;
+    left: -4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.container-card input[type="checkbox"]{
+    display: none;
+}
+
+.box-informationCardPayment{
+    width: 100%;
+    height: 50px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    @include displayFlex(row, nowrap, center, space-between);
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 97%;
+        height: 1px;
+        background-color: #6A6A6A;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+.box-card{
+    width: auto;
+    height: 26px;
+    @include displayFlex(row, nowrap, center, left);
+    gap: 10px;
+
+    img{
+        width: 46px;
+        height: 26px;
+        background-color: #D9D9D9;
+        border-radius: 2px;
+    }
+
+    .text-NameCardInformation{
+        font-size: 1em;
+        color: #000;
+        font-family: "Inter-Light";
+
+    }
+}
+
+.text-NumberCardInformation{
+    font-size: 1em;
+    color: #000;
+    font-family: "Inter-Regular";
+}
+
+.box-cardNumber{
+    padding-right: 15px;
+    position: relative;
+
+    &::before {
+        content: "";
+        width: 11px;
+        height: 8px;
+        background: url("../../images/icon/arrowSimple.svg") no-repeat;
+        filter: invert(83%) sepia(0%) saturate(0%) hue-rotate(212deg) brightness(99%) contrast(86%);
+
+        position: absolute;
+        top: 0px;
+        right: -1px;
+        bottom: 0px;
+        margin: auto;
+    }
+}
+
+.container-complementCard{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    @include displayFlex(row, nowrap, center, space-between);
+    display: none;
+}
+
+.box-splitTimes{
+    width: 115px;
+    height: 27px;
+    border: 1px solid #8E8E8E;
+    padding: 3px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 3px;
+    position: relative;
+    
+    &::before{
+        content: "";
+        width: 11px;
+        height: 8px;
+        background: url("../../images/icon/arrowSimple.svg") no-repeat;
+        filter: invert(83%) sepia(0%) saturate(0%) hue-rotate(212deg) brightness(99%) contrast(86%);
+
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        bottom: 0px;
+        margin: auto;
+    }
+}
+
+.select-splitTime{
+    width: 95px;
+    display: block;
+    height: 100%;
+    font-size: .9em;
+    color: #000;
+    font-family: "Inter-Light";
+    background: transparent;
+    border: 0px;
+    -webkit-appearance: none;
+    margin-top: -1px;
+}
+
+// 
+
+.container-card input[type="checkbox"]:checked + .container-complementCard{
+    display: flex;
+}
+
+// container-qrcodepix
+
+.container-qrcodepix{
+    width: 50%;
+    max-width: 300px;
+    height: auto;
+    margin: 0px auto 0px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.text-codepix{
+    display: block;
+    width: 100%;
+    height: 45px;
+    margin: 5px auto 0px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    text-align: center;
+    font-size: .9em;
+    color: #2F2F2F;
+}
+
+.content-warning{
+    display: none;
+    width: 50px;
+    height: 25px;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    text-align: center;
+    font-size: .6em;
+    color: #2F2F2F;
+
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 55px;
+    right: 4px;
+    z-index: 1;
+
+    &::before{
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 8px solid #fff;        
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+        border-radius: 2px;
+
+        position: absolute;
+        bottom: -7px;
+        right: 0px;
+        z-index: -1;
+    }
+}
+
+.text-warningEligible{
+    display: block;
+    width: 80%;
+    min-width: 200px;
+    height: 40px;
+    margin: 7px auto 0px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    text-align: center;
+    font-size: .8em;
+    color: #2F2F2F;
+}

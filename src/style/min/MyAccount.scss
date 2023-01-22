@@ -1,0 +1,131 @@
+@import url("../main.scss");
+@import "../default/variables.scss";
+
+.container-informationUser{
+    width: 100%;
+    height: auto;
+    padding: 15px 13px 5px 13px;
+    box-sizing: border-box;   
+    margin: 35px 0px 0px 0px;
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 94%;
+        height: 1px;
+        background-color: #A7A7A7;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+
+.text-SubTextInformation{
+    font-size: 1em;
+    text-transform: uppercase;
+    font-family: "Inter-Regular";
+    color: #A7A7A7;
+}
+
+.container-interactiveUserInformationAccount{
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+
+    @include displayFlex(column, nowrap, left, center);
+    gap: 15px;
+}
+
+.box-inputInformation{
+    width: 100%;
+    height: auto;
+}
+
+.text-describeInput{
+    font-size: .8em;
+    text-transform: capitalize;
+    font-family: "Inter-Light";
+    color: #A7A7A7;
+}
+
+.input-Information{
+    display: block;
+    width: 98%;
+    height: 40px;
+    background: #ECECEC;
+    border-radius: 4px;
+    color: #242424;
+    font-size: .98em;
+    font-family: "Inter-Light";
+    padding: 3px;
+    box-sizing: border-box;
+    margin-top: 3px;
+
+    &::placeholder{
+        color: #A7A7A7;
+        font-size: .8em;
+    }
+}
+
+.container-protectInteractiveUser{
+    width: 100%;
+    height: auto;
+    padding: 15px 13px 5px 13px;
+    box-sizing: border-box;   
+    margin: 20px 0px 0px 0px;
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 94%;
+        height: 1px;
+        background-color: #A7A7A7;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+.button-payOptions{
+    width: 100%;
+    height: 45px;
+    border-radius: 3px;
+    background-color: #124179;
+    color: #fff;
+    font-size: .9em;
+    font-family: "Inter-Regular";
+    padding: 5px;
+    box-sizing: border-box;
+    
+    @include displayFlex(row, nowrap, center, space-between)
+}
+
+.button-payOptions img{
+    width: 22px;
+    height: 22px;
+    filter: invert(100%) sepia(7%) saturate(1931%) hue-rotate(201deg) brightness(110%) contrast(110%);
+}
+
+.container-warning{
+    width: 93%;
+    height: auto;
+    background-color: rgba(195, 130, 32, 0.3);
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+
+    margin: 20px auto 10px auto;
+}
+
+.text-warning{
+    font-size: .85em;
+    color: #000;
+    font-family: "Inter-Regular";
+}

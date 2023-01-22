@@ -1,0 +1,155 @@
+@import url("../main.scss");
+
+.container-MenuChoose{
+    width: 100%;
+    height: calc(100vh - 72px);
+    height: -webkit-calc(100vh - 72px);
+    height: -moz-calc(100vh - 72px);
+    background-color: #FFFFFF;
+    box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 18px 18px 0px 0px;
+    padding: 10px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    overflow: hidden scroll;
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 10;
+}
+
+.button-closeMenu{
+    width: 28px;
+    height: 28px;
+    background: #127973;
+    border-radius: 9px 6px 6px 6px;
+    color: #fff;
+    font-size: 1em;
+    font-family: "Inter-Medium";
+}
+
+.container-informationTable{
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    padding: 10px 5px 5px 5px;
+    box-sizing: border-box;
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 90%;
+        height: 1px;
+        background-color: #8F8F8F;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+.style-SelectChoose{
+    background-color: #27B5E2;
+    margin-top: 20px;
+}
+
+.content-interactiveOptionTable{
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 25px;
+}
+
+.box-informationOptionTableChoose{
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 12px;
+}
+
+.text-informationChoose{
+    font-size: 1.1em;
+    color: #2F2F2F;
+    font-family: "Inter-Regular";
+    text-transform: uppercase;
+}
+
+.button-informationChoose{
+    min-width: 102px;
+    min-height: 35px;
+    height: 35px;
+    width: auto;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+    color: #2F2F2F;
+    font-size: 1.3em;
+    font-family: "Inter-Medium";
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-ChooseTable{
+    display: block;
+    width: 100%;
+    height: 47px;
+    background-color: #793712;
+    border-radius: 4px;
+    margin: 30px auto 0px auto;
+    
+    font-size: 1.1em;
+    color: #fff;
+    font-family: "Inter-Regular";
+    transition: .3s ease-in;
+
+    &:hover{
+        background-color: #69300f;
+    }
+}
+
+// 
+
+.style-CloseMenu{
+    display: block;
+    animation: CloseMenu 1.1s ease-in-out;
+}
+
+.style-OpenMenu{
+    display: block;
+    animation: OpenMenu 1.1s ease-in-out;
+}
+
+@keyframes CloseMenu {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(1000px);
+    }
+}
+
+@keyframes OpenMenu {
+    from{
+        transform: translateY(1000px);
+    }
+    to{
+        transform: translateY(0px);
+    }
+}

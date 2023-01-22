@@ -1,0 +1,247 @@
+@import url("../main.scss");
+@import "../default/variables.scss";
+
+#main-pay{
+    margin-top: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.container-warning{
+    width: 93%;
+    height: auto;
+    background-color: rgba(195, 130, 32, 0.3);
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+
+    margin: 20px auto 10px auto;
+}
+
+.text-warning{
+    font-size: .85em;
+    color: #000;
+    font-family: "Inter-Regular";
+}
+
+.container-selectTable{
+    width: 100%;
+    height: 80px;
+
+    margin-top: 10px;
+
+    @include displayFlex(row, nowrap, center, space-between);
+    gap: 5px;
+}
+
+.box-tableSelect{
+    width: 80px;
+    height: 47px;
+    background-color: #793712;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    color: #fff;
+    font-size: "Inter-Regular";
+    font-size: 1em;
+
+    @include displayFlex(row, nowrap, center, center)
+}
+
+.button-selectTable{
+    width: calc(100% - 80px);
+    height: 47px;
+    background-color: #793712;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    color: #fff;
+    font-size: "Inter-Regular";
+    font-size: 1em;
+}
+
+.container-paymentMethod{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    padding: 15px 0px 0px 0px;
+    box-sizing: border-box;
+    position: relative;
+
+    &::before{
+        content: "";        
+        width: 85%;
+        height: 1px;
+        background-color: #8F8F8F;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+.content-payment{
+    width: 100%;
+    height: auto;
+    margin-top: 25px;
+
+    @include displayFlex(row, nowrap, center, space-between);
+    gap: 5px;
+}
+
+.button-payment{
+    width: 60px;
+    height: 60px;
+    background-color: #F8F8F8;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    
+    img{
+        width: 39px;
+        height: 39px;
+        filter: invert(13%) sepia(0%) saturate(1330%) hue-rotate(240deg) brightness(85%) contrast(81%);
+    }
+}
+
+.style-selectPayment::before{
+    content: "\2713";
+    width: 17px;
+    height: 17px;
+    background-color: #1B7FB7;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+
+    position: absolute;
+    top: -4px;
+    left: -4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+//
+
+.container-contentValuePayment{
+    width: 100%;
+    height: auto;
+    padding: 17px;
+    margin: 25px auto 0px auto;
+    box-sizing: border-box;
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 80%;
+        height: 1.2px;
+        background-color: #8F8F8F;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+
+    &::after{
+        content: "";
+        width: 80%;
+        height: 1.2px;
+        background-color: #8F8F8F;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+}
+
+.box-value{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.text-valueTxt, .text-valueNum{
+    display: block;
+    font-size: 1.6em;
+    color: #242424;
+    font-family: "Inter-Medium";
+}
+
+.text-valueSplitTime{
+    display: block;
+    font-size: .8em;
+    color: #127973;
+    font-family: "Inter-Medium";
+    margin-top: 5px;
+    text-align: right;
+}
+
+.button-finishPurchase{
+    display: block;
+    width: 100%;
+    height: 47px;
+    background-color: #127973;
+    border-radius: 4px;
+    margin: 30px auto 0px auto;
+    
+    font-size: 1.2em;
+    color: #fff;
+    font-family: "Inter-Medium";
+    transition: .3s ease-in;
+
+    &:hover{
+        background-color: #0f6863;
+    }
+}
+
+.container-informationRequestPayment{
+    width: 90%;
+    height: auto;
+    margin: 20px auto 0px auto;
+
+    @include displayFlex(row, nowrap, center, space-between)
+}
+
+.box-content-informationPayment{
+    width: 145px;
+    height: 42px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+}
+
+.box-content-informationPayment .box-showInformation{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    gap: 10px;
+
+    img{
+        width: 19px;
+        height: 19px;
+    }
+
+    span{
+        font-size: 1.1em;
+        font-family: "Inter-Medium";
+    }
+}
+
+.style-dist{
+    filter: invert(39%) sepia(71%) saturate(562%) hue-rotate(158deg) brightness(96%) contrast(95%);
+}

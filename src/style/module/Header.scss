@@ -1,0 +1,96 @@
+@import url("../main.scss");
+
+header{
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    padding: 15px 15px 5px 15px;
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.tittle-page{
+    font-size: 2.2em;
+    font-family: "Inter-Regular";
+}
+
+.content-bar-menu{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 3px;
+    box-sizing: border-box;
+    background-color: #B8D7D5;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.content-bar-menu *{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+// 
+
+.button-backpage{
+    width: 60px;
+    height: 35px;
+    background-color: #127973;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-backpage img{
+    width: 27px;
+    height: 27px;
+    filter: invert(100%) sepia(0%) saturate(7492%) hue-rotate(338deg) brightness(104%) contrast(102%);
+    overflow: hidden;
+}
+
+.style-alternative-menu{
+    background-color: #127973;
+}
+
+.style-alternative-menu img{
+    filter: invert(100%) sepia(0%) saturate(7492%) hue-rotate(338deg) brightness(104%) contrast(102%);
+}
+
+.container-PayStyle{
+    width: calc(100% - 40px);
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 15px;
+}
+
+.container-PayStyle img{
+    display: block;
+    width: 27px;
+    height: 27px;
+    filter: invert(33%) sepia(17%) saturate(4717%) hue-rotate(143deg) brightness(94%) contrast(86%);
+    overflow: hidden;
+}
+
+.header-stylePay .content-bar-menu img, .header-alternativeStyle .content-bar-menu img{
+    width: 80%;
+}

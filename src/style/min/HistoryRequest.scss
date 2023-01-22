@@ -1,0 +1,163 @@
+@import url("../main.scss");
+@import "../default/variables.scss";
+
+.container-nav{
+    width: 100%;
+    height: auto;
+    margin: 36px auto;
+    padding: 10px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.container-pending{
+    width: 100%;
+    height: auto;
+
+    @include displayFlex(column, nowrap, left, center);
+    gap: 17px;
+}
+
+.text-subTextrequest{
+    font-size: .9em;
+    text-transform: uppercase;
+    font-family: "Inter-Regular";
+    color: #A7A7A7;
+}
+
+.container-content-request{
+    width: 100%;
+    height: auto;
+    min-height: 115px;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.box-informationRequest{
+    width: 100%;
+    height: 35px;
+    background: #B8D7D5;
+    padding: 5px;
+    box-sizing: border-box;
+
+    @include displayFlex(row, nowrap, center, space-between);
+}
+
+.text-date-request{
+    font-family: 'Inter-Medium';
+    font-size: 1.1em;
+    color: #242424;
+}
+
+.box-informationCard{
+    @include displayFlex(row, nowrap, center, space-between);
+
+    width: 87px;
+    height: 29px;
+    background: #127973;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.box-informationCard img{
+    display: block;
+    width: 35px;
+    height: 21px;
+    background-color: #A7A7A7;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.text-numberCard{
+    font-size: .7em;
+    color: #fff;
+    font-family: "Inter-Light";
+}
+
+.box-othersInformationRequest{
+    width: 100%;
+    height: auto;
+    margin: 10px auto 0px auto;
+    padding: 5px;
+    box-sizing: border-box;
+
+    @include displayFlex(row, nowrap, center, space-between);
+}
+
+.text-valueNumberRequest{
+    display: block;
+    font-size: 1.3em;
+    color: #242424;
+    font-family: "inter-SemiBold";
+}
+
+.text-valuePartRequest{
+    display: block;
+    font-size: .7em;
+    color: #127973;
+    font-family: "Inter-Medium";
+    margin-top: 3px;
+}
+
+.content-tableSelect{
+    width: 66px;
+    height: 47px;
+    background: #B8D7D5;
+    border-radius: 3px;
+    color: #fff;
+
+    position: relative;
+    @include displayFlex(row, nowrap, center, center);
+}
+
+.container-interactiveUser{
+    width: 95%;
+    height: auto;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    margin: 15px auto 0px auto;
+    border-top: 1px solid #8F8F8F;
+
+    @include displayFlex(row, nowrap, center, space-between);
+    gap: 10px;
+}
+
+.button-preparing{
+    width: calc(100% - 66px);
+    height: 40px;
+    border-radius: 4px;
+    background-color: #DB8864;
+    color: #fff;
+    font-family: "Inter-Light";
+    font-size: 1em;
+}
+
+.box-finishTimeRequest{
+    width: 66px;
+    height: 40px;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    @include displayFlex(row, nowrap, center, center);
+}
+
+// 
+
+.container-history{
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+    box-sizing: border-box;
+    border-top: 1px solid #8F8F8F;
+    margin-top: 10px;
+
+    @include displayFlex(column, nowrap, left, center);
+    gap: 17px;
+}

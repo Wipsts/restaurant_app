@@ -1,0 +1,47 @@
+@import url("../../../style/main.scss");
+
+.container-svgGenerate{
+    width: 100%;
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-top: 20px;
+}
+
+.container-svgGenerate::-webkit-scrollbar {
+    display: none; 
+}
+
+.container-Scrolling{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+}
+
+.container-Scrolling img{
+    width: 35vw;
+    min-width: 100px;
+    height: auto;
+    filter: invert(100%) sepia(0%) saturate(1777%) hue-rotate(21deg) brightness(92%) contrast(83%);
+}
+
+.text-scrolling{
+    display: block;
+    font-size: 1em;
+    color: #D9D9D9;
+    text-align: center;
+    font-family: "Inter-Medium";
+}
+
+.text-svg{
+    font-weight: bold;
+    font-family: "Inter-Regular";
+    font-size: .7em;
+}

@@ -1,0 +1,49 @@
+@import "./default/fonts.scss";
+@import "./default/variables.scss";
+
+*{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: "Inter-Regular";
+}
+
+a{
+    text-decoration: none;
+}
+
+button:focus,
+button:active {
+    outline: none;
+}
+
+input:focus,
+input:active {
+    outline: none;
+}
+
+textarea:focus,
+textarea:active {
+    outline: none;
+}
+
+select:active,
+select:focus {
+    outline: none;
+}
+
+// variables
+
+@mixin displayFlex( $direction, $wrap, $align, $content) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    align-items: $align;
+    justify-content: $content;
+}

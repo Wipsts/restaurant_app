@@ -1,0 +1,40 @@
+@import url("../main.scss");
+
+.contentSeachBox{
+    width: 85%;
+    height: 25px;
+    background-color: #fff;
+    margin: 37px auto auto;
+    padding: 2px 2px 12px 2px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #BFBFBF;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
+.contentSeachBox img{
+    width: 25px;
+    height: 25px;
+    filter: invert(93%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(85%) contrast(87%);
+}
+
+.fieldSearch-input{
+    width: calc(100% - 25px);
+    height: 25px;
+    background-color: #fff;
+    color: #292929;
+    font-family: "Inter-Light";
+    font-size: 1.1em;
+    transition: .5s ease-in-out;
+    border-radius: 1px;
+}
+
+.fieldSearch-input::placeholder{
+    color: #BFBFBF;
+    font-size: .9em;
+}
