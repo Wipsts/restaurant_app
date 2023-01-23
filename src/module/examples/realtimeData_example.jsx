@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { onSnapshot  } from "firebase/firestore";
-import { DataCollection } from "../../lib/firestore.collections";
+import { DataCollection } from "../../server/host/firestore.collections";
 
 function AutomaticCollection(){
     const [datas, setDatas] = useState([]);

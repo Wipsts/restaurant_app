@@ -1,9 +1,8 @@
 import {getCookie} from './cookie';
-
 class userLog{
     init(){
-        if(getCookie("user.login")){
-            const valUserCookie = getCookie("user.login").split("-")
+        if(getCookie("USER.LOGIN")){
+            const valUserCookie = getCookie("USER.LOGIN").split("-")
             if(valUserCookie[0] && valUserCookie[1]){ // userId && token
                 return true
             }else{

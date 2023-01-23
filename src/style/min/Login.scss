@@ -179,19 +179,21 @@
 // registre
 
 .container-warningRegistre{
-    width: 93%;
+    width: 100%;
     height: auto;
-    background: rgba(84, 196, 32, 0.3);
     border-radius: 5px;
+    background: rgba(84, 196, 32, 0.1);
     padding: 8px;
     box-sizing: border-box;
+    text-align: left;
 
     margin: 20px auto 10px auto;
     
     span{
-        font-size: .85em;
+        font-size: 1em;
         color: #000;
         font-family: "Inter-Regular";
+        text-align: justify;
     }
 }
 
@@ -218,10 +220,123 @@
     color: #000;
     font-family: "Inter-Regular";
     margin-top: 20px;
+    text-decoration: underline;
 }
 
 .style-warning{
     margin-top: 20px;
     margin-bottom: 20px;
     background: rgba(196, 32, 32, 0.3);
+}
+
+// 
+.container-emailVerify{
+    width: 100%;
+    height: auto;
+    background: rgba(84, 196, 32, 0.3);
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: 40px 0px 30px 0px;
+}
+
+.container-content-image{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    position: relative;
+}
+
+.content-images{
+    width: 100%;
+    min-width: 105px;
+    height: auto;
+    @include displayFlex(row, nowrap, center, space-between);
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 30%;
+        height: 3px;
+        border-top: 3px dashed #222222;;
+
+        position: absolute;
+        left: 47px;
+        top: 0px;
+        bottom: 0px;
+        margin: auto;
+    }
+    &::after{
+        content: "";
+        width: 30%;
+        height: 3px;
+        border-top: 3px dashed #222222;;
+
+        position: absolute;
+        right: 47px;
+        top: 0px;
+        bottom: 0px;
+        margin: auto;
+    }
+    img{
+        filter: invert(10%) sepia(0%) saturate(635%) hue-rotate(182deg) brightness(107%) contrast(93%)
+    }
+}
+
+.image-Lock{
+    width: 90px;
+    height: 90px;
+    position: relative;
+    top: -18px;
+}
+.image-Site, .image-User{
+    width: 47px;
+    height: 47px;
+}
+
+.box-ball{
+    width: 6px;
+    height: 6px;
+    background-color: #222222;
+    border-radius: 50%;
+    position: absolute;
+    top: -20px;
+    bottom: 0px;
+    margin: auto;
+}
+
+.style-right{
+    right: 47px;
+    animation: 5s ballRightAnimation ease-in-out infinite;
+}
+
+.style-left{
+    border-radius: 0px;
+    left: 48px;
+    animation: 5s ballLeftAnimation ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+@keyframes ballRightAnimation {
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(-86px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+@keyframes ballLeftAnimation {
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(86px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
 }

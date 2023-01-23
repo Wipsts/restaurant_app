@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { __query }from "../main.js"
-import ComponentExample from "./realtimeData_example"
+import { QUERY }from "../main.js"
+// import ComponentExample from "./realtimeData_example"
 
-import "../style/min/index.scss";
+import "../../style/min/index.scss";
 
 function Index(props){
     const [id, setID] = useState('')
@@ -11,7 +11,7 @@ function Index(props){
 
 
     function callGet(){
-        __query('get', {'bd': "user", 'select': ""}, "null", response => {
+        QUERY('get', {'bd': "user", 'select': ""}, "null", response => {
             console.log(response)
         })
     }
@@ -23,19 +23,28 @@ function Index(props){
         }
 
         var updateData = {'id': id, 'data': { 'name': name }}
-        __query('update', {'bd': "user", 'update': updateData}, "null", response => {
+        QUERY('update', {'bd': "user", 'update': updateData}, "null", response => {
             console.log(response)
         })
     }
 
     function callInsert(e){
         e.preventDefault()
-        if(name === "" || email === ""){
+        if(email === ""){
             return 
         }
 
-        var inserData = {'email': email, 'name': name}
-        __query('add', {'bd': "user", 'insert_data': inserData}, "null", response => {
+        var inserDataUser = {
+            "birthday": "",
+            "cpf": "",
+            "email": email,
+            "idCard": "",
+            "idHstoric": "",
+            "name": "",
+            "token": "j108su10190si19"
+        }
+        QUERY('add', {'bd': "user", 'insert_data': inserDataUser}, "null", response => {
+            console.log("here")
             console.log(response)
         })
     }
@@ -64,7 +73,7 @@ function Index(props){
 
 
 
-            <ComponentExample/>
+            {/* <ComponentExample/> */}
         </>
     )
 }

@@ -18,15 +18,18 @@ function Login(props){
             return 
         }        
         
-        const reponseLogin = new authenticateLogin().logUser(emailField, _cripyPass(passwordField))        
-        if(reponseLogin.login){navigate("/account")}else{setWarning({display: "block", text: "Usuário ou senha incorretos, verifique a ortográfia e tente novamente!"})}
+        new authenticateLogin().logUser(emailField, passwordField, Response => {
+            if(Response.login){
+                navigate("/account")
+            }else{
+                if(Response.why === "notUser"){
+                    setWarning({display: "block", text: "Usuário ou senha incorretos, verifique a ortográfia e tente novamente!"})
+                }else if(Response.why === "email"){
+                    setWarning({display: "block", text: `Seu email não foi validado!, clique em cadastrar e nos informe o codigo enviado para "${emailField}"`})
+                }
+            }
+        })        
 
-        function _cripyPass(pass){
-            // var bcrypt = require('bcryptjs');
-            // const salt = bcrypt.genSaltSync(10);
-            // const hash = bcrypt.hashSync(pass, salt);
-            return pass
-        }
     }
 
     function loginAuthenticate(form){

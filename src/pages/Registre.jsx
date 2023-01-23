@@ -2,46 +2,46 @@ import React, {useState, useEffect} from 'react';
 import Header from "../module/components/Header";
 import {getCookie, registreUser} from "../module/main"
 import { Link } from "react-router-dom";
+import siteIcon from "../images/icon/siteIcon.svg"
+import lockIcon from "../images/icon/LockIcon.svg"
+import userIcon from "../images/icon/userIcon.svg"
 import "../style/min/Login.scss"
 
 function Login(props){
     const [passwordField, setPasswordField] = useState('')
     const [checkPasswordField, setCheckPasswordField] = useState('')
     const [emailField, setEmailField] = useState('')
-    const [nameField, setNameField] = useState("")
-    const [code, setCode] = useState({code: "", codeGenerate: ""})
-    const [configPage, setConfigPage] = useState({protocol: [1,0]})
+    const [configPage, setConfigPage] = useState({protocol: [0,1]})
     const [warning, setWarning] = useState({display: "none", text: ""})
+    const [sendOtherEmailTime, setSendOtherEmailTime] = useState("01:30")
 
-    function registreForm_init(e){
-        e.preventDefault()
-        if(emailField === "" || nameField === ""){
-            setWarning({display: "block", text: "Preencha todos os campos!"})
-            return 
-        }        
-        
-        const codeGenerate = new registreUser().registreNewUser(emailField, nameField)
-        if(codeGenerate.registre){setCode({code: "", codeGenerate: codeGenerate}); setConfigPage({protocol: [0,1]})}
-
-        function _cripyPass(pass){
-            // var bcrypt = require('bcryptjs');
-            // const salt = bcrypt.genSaltSync(10);
-            // const hash = bcrypt.hashSync(pass, salt);
-            return pass
-        }
-    }
-
-    function registreFormUser(e){
+    function registre(e){
         e.preventDefault()
         if(!AllFieldsHaveValue()){
             return 
-        }   
+        }
         if(!samePasswords()){
             return
         }
+        
+        new registreUser().registre(emailField, passwordField, Response => {
+            if(Response.registre){
+                setConfigPage({protocol: [0,1]})
+            }else{
+                setWarning({display: "block", text: "Ops! não consiguimos registrar sua conta, verifique as informações e tente novamente"})
+            }
+        })
 
-        new registreUser().registre(emailField, nameField, passwordField, code, code.codeGenerate)
-    
+        function AllFieldsHaveValue(){
+            if(emailField === "" || passwordField === "" || checkPasswordField === ""){
+                setWarning({display: "block", text: "Prencha todos os valores"})
+
+                return false
+            }else{
+                return true
+            }
+        }
+
         function samePasswords(){
             if(passwordField !== checkPasswordField){
                 setWarning({display: "block", text: "As senhas não coencidem, tente verificar a ortográfia."})
@@ -50,15 +50,60 @@ function Login(props){
                 return true
             }
         }
-        function AllFieldsHaveValue(){
-            if(emailField === "" || passwordField === "" || checkPasswordField === "" || code === ""){
-                setWarning({display: "block", text: "Prencha todos os valores"})
+    }
 
-                return false
-            }else{
+    function sendEmail(){
+        if(timeHasBeenReset){
+            new registreUser().sendEmail(emailField, Response => {
+                if(Response.send){
+                    setSendOtherEmailTime("05:00")
+                    setWarning({display: "block", text: "Verifique seu e-mail, lembre de verificar o spam!"})
+                }else{
+                    setWarning({display: "block", text: "Ops! não conseguimos enviar um email alternativo, tente novamente mais tarde"})
+                }
+            })
+        }
+
+        function timeHasBeenReset(){
+            const time = sendOtherEmailTime.split(":")
+            if(parseInt(time[0]) === 0 && parseInt(time[1]) === 0){
                 return true
+            }else{
+                return false
             }
         }
+    }
+
+    const countDow = () => {
+        const time = sendOtherEmailTime.split(":")
+
+        function count(time){
+            var minute = parseInt(time[0])
+            var second = parseInt(time[1])
+
+            if(minute >= 1 && second >= 0){
+                if(minute === 0 && second >= 1){
+                    second--
+                }else{
+                    if(second === 0){
+                        minute--
+                        second = 59
+                    }else{
+                        second--
+                    }
+                }
+            }else{
+                if(minute === 0 && second === 0 ){
+                    minute = 0
+                    second = 0
+                }else{
+                    second--
+                }
+            }
+            return `${(minute <= 9 ? `0${minute}` : minute)}:${second <= 9 ? `0${second}` : second}`
+        }
+
+        setSendOtherEmailTime(count(time))
     }
 
     function registreAuthenticate(form){
@@ -74,7 +119,7 @@ function Login(props){
         }
 
         function isRegistre(){
-            return (getCookie("registrePath") && getCookie("registrePath") === "registre_2") ? true : false
+            return (getCookie("registrePath") && getCookie("registrePath") === "mailVerify") ? true : false
         }
 
         function setPage(type){
@@ -87,67 +132,78 @@ function Login(props){
     }
 
     useEffect(() => {
+        setSendOtherEmailTime("01:30")
         pageSelectWithHistory()
     }, []);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            countDow()
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [sendOtherEmailTime]);
 
     return (
         <>
             <Header type={1} page="Cadastrar" link={"/Login"}/>
             <main className='main_login'>
-                <div className="container-protocol" style={{display: (configPage.protocol[0] ? "block" : "none")}}>
-                    <div className="container-authenticateLogin">
-                        <div onClick={(e) => registreAuthenticate(0)} className="box-authenticator" id="login_google"><img src="" alt="" /></div>
-                        <div onClick={(e) => registreAuthenticate(1)} className="box-authenticator" id="login_apple"><img src="" alt="" /></div>
-                        <div onClick={(e) => registreAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src="" alt="" /></div>
+
+                {configPage.protocol[0] ? (
+                    <div className="container-protocol">
+                        <div className="container-authenticateLogin">
+                            <div onClick={(e) => registreAuthenticate(0)} className="box-authenticator" id="login_google"><img src="" alt="" /></div>
+                            <div onClick={(e) => registreAuthenticate(1)} className="box-authenticator" id="login_apple"><img src="" alt="" /></div>
+                            <div onClick={(e) => registreAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src="" alt="" /></div>
+                        </div>
+
+                        <div className="container-loginDefault container-registreDefault">
+                            <div className="container-warningRegistre style-warning" style={{display: warning.display}}><span>{warning.text}</span></div>
+                            <form onSubmit={registre}>
+                                <div className="box-interativeUser">
+                                    <span className='text-inputField'>E-mail</span>
+                                    <input type="email" id="emailField" className='input-FieldInterative' placeholder='E-mail' value={emailField} onChange={(e) => {setEmailField(e.target.value)}}/>
+                                </div>
+                                <hr />
+                                <div className="box-interativeUser">
+                                    <span className='text-inputField'>Senha</span>
+                                    <input type="password" minLength={5} autoComplete="on" id="passwordField" className='input-FieldInterative' placeholder='Senha' value={passwordField} onChange={(e) => {setPasswordField(e.target.value)}}/>
+                                </div>
+                                <div className="box-interativeUser">
+                                    <span className='text-inputField'>Confirmar Senha</span>
+                                    <input type="password" minLength={5} autoComplete="on" id="checkPasswordField" className='input-FieldInterative' placeholder='Senha' value={checkPasswordField} onChange={(e) => {setCheckPasswordField(e.target.value)}}/>
+                                </div>
+                                
+                            
+                                <div className="box-interativeUser">
+                                    <button type="submit" className='button-formButton style-registre'>Cadastrar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <Link to="/login"><button className='button-alterateTypeUser style-login'>Login</button></Link>
                     </div>
 
-                    <div className="container-loginDefault">
+                ) : (
+                    <div className="container-protocol">
                         <div className="container-warningRegistre style-warning" style={{display: warning.display}}><span>{warning.text}</span></div>
-                        <form onSubmit={registreForm_init}>
-                            <div className="box-interativeUser">
-                                <span className='text-inputField'>E-mail</span>
-                                <input type="email" id="emailField" className='input-FieldInterative' placeholder='E-mail' value={emailField} onChange={(e) => {setEmailField(e.target.value)}}/>
+
+                        <div className="container-emailVerify">
+                            <div className="container-warningRegistre"><span><b>Enviamos um código</b> de confirmação para “<i>{emailField}</i>”, verifique o spam caso não o encontre</span></div>
+                            <div className="container-content-image">
+                                <div className="content-images">
+                                    <img src={siteIcon} alt="" className='image-Site'/>
+                                    <img src={lockIcon} alt="" className='image-Lock'/>
+                                    <img src={userIcon} alt="" className='image-User'/>
+                                </div>
+                                <div className="box-ball style-right"></div>
+                                <div className="box-ball style-left"></div>
                             </div>
-                            <div className="box-interativeUser">
-                                <span className='text-inputField'>Nome</span>
-                                <input type="text" minLength={5} autoComplete="on" id="nameField" className='input-FieldInterative' placeholder='Nome' value={nameField} onChange={(e) => {setNameField(e.target.value)}}/>
-                            </div>
-                        
-                            <div className="box-interativeUser">
-                                <button type="submit" className='button-formButton style-registre'>Continuar</button>
-                            </div>
-                        </form>
+                            <span onClick={(e) => sendEmail(e)} className='text-confirmCode'>Reenviar código ({sendOtherEmailTime})</span>                            
+                        </div>
+
+                        <Link to="/login"><button className='button-formButton'>Login</button></Link>
                     </div>
+                )}
 
-                    <Link to="/login"><button className='button-alterateTypeUser style-login'>Login</button></Link>
-                </div>
-
-                <div className="container-protocol" style={{display: (configPage.protocol[1] ? "block" : "none")}}>
-                    <div className="container-warningRegistre"><span><b>Enviamos um código</b> de confirmação para “<i>{emailField}</i>”, verifique o spam caso não o encontre</span></div>
-                    <div className="container-warningRegistre style-warning" style={{display: warning.display}}><span>{warning.text}</span></div>
-
-                    <div className="container-registreDefault">
-                        <form onSubmit={registreFormUser}>
-                            <div className="box-interativeUser">
-                                <span className='text-inputField'>Código de confirmação</span>
-                                <input type="number" id="codeField" className='input-FieldInterative' placeholder='código' value={code.code} onChange={(e) => {setCode(prevState => {return{...prevState, code: e.target.value}})}}/>
-                                <span className='text-confirmCode'>Reenviar código (1:00)</span>                            
-                            </div>
-                            <hr />
-                            <div className="box-interativeUser">
-                                <span className='text-inputField'>Senha</span>
-                                <input type="password" minLength={5} autoComplete="on" id="passwordField" className='input-FieldInterative' placeholder='Senha' value={passwordField} onChange={(e) => {setPasswordField(e.target.value)}}/>
-                            </div>
-                            <div className="box-interativeUser">
-                                <span className='text-inputField'>Confirmar Senha</span>
-                                <input type="password" minLength={5} autoComplete="on" id="checkPasswordField" className='input-FieldInterative' placeholder='Senha' value={checkPasswordField} onChange={(e) => {setCheckPasswordField(e.target.value)}}/>
-                            </div>
-                            <div className="box-interativeUser">
-                                <button type="submit" className='button-formButton style-registre'>Cadastrar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </main>
         </>
     )

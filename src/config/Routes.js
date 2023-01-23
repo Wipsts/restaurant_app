@@ -10,9 +10,10 @@ import HistoryRequest from "../pages/HistoryRequest"
 import MyAccount from "../pages/MyAccount"
 import Pay from "../pages/Pay"
 import Login from "../pages/Login"
+// import Registre from "../pages/RegistreWithAuth"
 import Registre from "../pages/Registre"
 
-import ExamplesDB from "../example/implementacao_db"
+import ExamplesDB from "../module/examples/implementacao_db"
 import ExampleCreateSVG from "../module/interactiveSvg/SVG"
 
 export default function __Routes(){

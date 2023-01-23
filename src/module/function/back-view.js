@@ -1,4 +1,4 @@
-import {db} from "./../server/host/init-firebase"
+import {db} from "../../server/host/init-firebase"
 
 import getData from "../../server/host/function_database/getData"
 import addData from "../../server/host/function_database/addData"
