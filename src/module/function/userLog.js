@@ -1,9 +1,11 @@
 import {getCookie} from './cookie';
 class userLog{
+    // TODO modificar para atenticação com firebase
     init(){
         if(getCookie("USER.LOGIN")){
-            const valUserCookie = getCookie("USER.LOGIN").split("-")
-            if(valUserCookie[0] && valUserCookie[1]){ // userId && token
+            // TODO autenticação com o firebase/auth
+            const valUserCookie = getCookie("USER.LOGIN")
+            if(valUserCookie){
                 return true
             }else{
                 return false

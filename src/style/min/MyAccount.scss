@@ -107,6 +107,12 @@
     @include displayFlex(row, nowrap, center, space-between)
 }
 
+.style-logout{
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #9c1616;
+}
+
 .button-payOptions img{
     width: 22px;
     height: 22px;

@@ -1,4 +1,4 @@
-import { collection, getDocs} from "firebase/firestore";
+import { collection, getDocs, query, where, documentId } from "firebase/firestore";
 
 async function getData(data, db, res) {
     const dataCollectionRef = collection(db, data.bd);
@@ -10,4 +10,14 @@ async function getData(data, db, res) {
     })
 }
 
-export default getData
+async function getDataEspecific(data, db, res) {
+    const dataCollectionRef = collection(db, data.bd);
+    const r = query(dataCollectionRef, where((data.where[0] === "documentID" ? documentId() : data.where[0]), "==", data.where[1])); // format where => "state", "==", "CA"
+    const querySnapshot = await getDocs(r);
+    querySnapshot.forEach((doc) => {
+      res({id: doc.id, data: doc.data()})
+    });
+}
+
+
+export {getData, getDataEspecific}

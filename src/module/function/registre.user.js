@@ -49,22 +49,29 @@ class registreUser{
                 "pending" : {},
                 "historic" : []
             }
+            var inserDataList = {
+                "product": [],
+                "totalVal": "0,00"
+            }
 
             // reponse => id
             QUERY('add', {'bd': "historic", 'insert_data': inserDataHistoric}, "null", responseHistoric => {
                 QUERY('add', {'bd': "card", 'insert_data': inserDataCard}, "null", responseCard => {
-                    var inserDataUser = {
-                        birthday: "",
-                        cpf: "",
-                        email: email,
-                        idCard: responseCard,
-                        idHstoric: responseHistoric,
-                        name: "",
-                        token: token
-                    }
-                    QUERY('add', {'bd': "user", 'insert_data': inserDataUser}, "null", response => {
-                        res(true)
-                    })    
+                    QUERY('add', {'bd': "list", 'insert_data': inserDataList}, "null", responseList => {
+                        var inserDataUser = {
+                            birthday: "",
+                            cpf: "",
+                            email: email,
+                            idCard: responseCard,
+                            idHstoric: responseHistoric,
+                            name: "",
+                            idList: responseList,
+                            token: token
+                        }
+                        QUERY('add', {'bd': "user", 'insert_data': inserDataUser}, "null", response => {
+                            res(true)
+                        })    
+                    })   
                 })
             })
         

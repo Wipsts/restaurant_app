@@ -20,7 +20,7 @@ function Login(props){
         
         new authenticateLogin().logUser(emailField, passwordField, Response => {
             if(Response.login){
-                navigate("/account")
+                navigate("/orderList")
             }else{
                 if(Response.why === "notUser"){
                     setWarning({display: "block", text: "Usuário ou senha incorretos, verifique a ortográfia e tente novamente!"})

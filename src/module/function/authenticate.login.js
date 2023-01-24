@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import {setCookie} from "../main"
 class authenticateLogin{
     loginWithAuthenticate(authenticate){
@@ -29,6 +29,22 @@ class authenticateLogin{
             // const errorMessage = error.message;
             res({login: false, why: "notUser"})
         });        
+    }
+
+    removeValuesLinkedUser(){
+        setCookie("USER.LOGIN", null, -999999)
+        localStorage.removeItem("historicData");
+        localStorage.removeItem("tagsIdsResponseUser");
+    }
+
+    logOut(res){
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          this.removeValuesLinkedUser()
+          res({logout: true})
+        }).catch((error) => {
+          res({logout: false, why: error.message})
+        });
     }
 }
 export default authenticateLogin

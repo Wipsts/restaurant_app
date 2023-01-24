@@ -38,6 +38,52 @@ select:focus {
     outline: none;
 }
 
+// default
+
+.container-logInMove{
+    width: 95%;
+    height: auto;
+    padding: 12px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.15);
+    border-radius: 5px;
+    margin: 40px auto 20px auto;
+}
+
+.text-WarningLogin{
+    display: block;
+    font-size: 2.1em;
+    font-family: "Inter-Bold";
+}
+
+.text-subWarningLogin{
+    display: block;
+    font-size: 1em;
+    color: #A7A7A7;
+    width: 100%;
+    text-align: left;
+    font-family: "Inter-Light";
+    margin: 10px auto 0px auto;
+}
+
+.button-warningLogin{
+    display: block;
+    width: 100%;
+    min-width: 250px;
+    height: 40px;
+    background-color: #127973;
+    color: #fff;
+    font-size: 1em;
+    font-family:"Inter-Regular";
+    border-radius: 3px;
+    margin: 30px auto 0px auto;
+    transition: .3s ease-in-out;
+
+    &:hover{
+        background-color: #106863;
+    }
+}
+
 // variables
 
 @mixin displayFlex( $direction, $wrap, $align, $content) {

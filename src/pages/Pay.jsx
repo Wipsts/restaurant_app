@@ -1,9 +1,10 @@
 /* eslint-disable no-unreachable */
 import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom"
 import Header from "../module/components/Header";
 import MenuChoose from "../module/components/MenuChoose";
 import ResponsePayment from "../module/components/ResponsePayment";
-import {payCompute} from "../module/main"
+import {payCompute, userLog} from "../module/main"
 
 import cardIcon from "../images/icon/cardIcon.svg"
 import virtualCardIcon from "../images/icon/virtualCardIcon.svg"
@@ -96,55 +97,66 @@ function Pay(props){
             <MenuChoose configTablesRequest={configTablesRequest} CloseMenuOnclickButton={(e) => closeOpenMenu()} mode={modeMenuChoose}/>
 
             <main id="main-pay">
-                <div className="container-warning">
-                    <span className="text-warning"><b>Atenção</b> esses pedidos são de <u> consumo no restaurante</u>, isto é uma comodidade feita para minimizar o tempo de espera da comida e da mesa</span>
-                </div>
-
-                <div className="container-selectTable">
-                    <div className="box-tableSelect">{configTables.configTable_table.idTable}</div>
-                    <button className="button-selectTable" onClick={(e) => closeOpenMenu()}>Escolher Mesa</button> 
-                    {/* or Alterar Mesa */}
-                </div>
-
-                <div className="container-paymentMethod">
-                    <span className="text-SubTextInformation style-paymentMethod">Opções de pagamento</span>                    
-
-                    <div className="content-payment">
-                        <button className={`button-payment ${selectPayment[0] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(0)} title="Cartão de crédito"><img src={cardIcon} alt="card" /></button>
-                        <button className={`button-payment ${selectPayment[1] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(1)} title="Cartão de virtual"><img src={virtualCardIcon} alt="virtualCard" /></button>
-                        <button className={`button-payment ${selectPayment[2] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(2)} title="PIX"><img src={pixIcon} alt="pix" /></button>
-                        <button className={`button-payment ${selectPayment[3] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(3)} title="Cartão Fidelidade"><img src={loyaltyCardIcon} alt="loyaltyCard" /></button>
-                    </div>
-
-                    <ResponsePayment splitTime={splitTimeRequest} cardSelect={cardSelectRequest} cards={cards} layout={selectPayment} />                    
-                </div>
-
-                <div className="container-contentValuePayment">
-                    <div className="box-value">
-                        <span className="text-valueTxt">Total: </span>
-                        <div className="box-valuePayment">
-                            <span className="text-valueNum">R$ {configPay.value.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
-                            <span className="text-valueSplitTime">{splitTime}x de {(configPay.value / parseInt(splitTime)).toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
+                {(new userLog().init()) ? (
+                    <>
+                        <div className="container-warning">
+                            <span className="text-warning"><b>Atenção</b> esses pedidos são de <u> consumo no restaurante</u>, isto é uma comodidade feita para minimizar o tempo de espera da comida e da mesa</span>
                         </div>
-                    </div>
-                </div>
-
-                <div className="container-informationRequestPayment">
-                    <div className="box-content-informationPayment">
-                        <div className="box-showInformation style-clock">
-                            <img src={clockIcon} alt="Time" />
-                            <span className="text-information">{configPay.timePreparing} min</span>
+        
+                        <div className="container-selectTable">
+                            <div className="box-tableSelect">{configTables.configTable_table.idTable}</div>
+                            <button className="button-selectTable" onClick={(e) => closeOpenMenu()}>Escolher Mesa</button> 
+                            {/* or Alterar Mesa */}
                         </div>
-                    </div>
-                    <div className="box-content-informationPayment">
-                        <div className="box-showInformation style-dist">
-                            <img src={distIcon} alt="Time" />
-                            <span className="text-information">{configPay.timeMove} min</span>
+        
+                        <div className="container-paymentMethod">
+                            <span className="text-SubTextInformation style-paymentMethod">Opções de pagamento</span>                    
+        
+                            <div className="content-payment">
+                                <button className={`button-payment ${selectPayment[0] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(0)} title="Cartão de crédito"><img src={cardIcon} alt="card" /></button>
+                                <button className={`button-payment ${selectPayment[1] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(1)} title="Cartão de virtual"><img src={virtualCardIcon} alt="virtualCard" /></button>
+                                <button className={`button-payment ${selectPayment[2] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(2)} title="PIX"><img src={pixIcon} alt="pix" /></button>
+                                <button className={`button-payment ${selectPayment[3] ? "style-selectPayment" : ""}`} onClick={(e) => selectThisPayment(3)} title="Cartão Fidelidade"><img src={loyaltyCardIcon} alt="loyaltyCard" /></button>
+                            </div>
+        
+                            <ResponsePayment splitTime={splitTimeRequest} cardSelect={cardSelectRequest} cards={cards} layout={selectPayment} />                    
                         </div>
+        
+                        <div className="container-contentValuePayment">
+                            <div className="box-value">
+                                <span className="text-valueTxt">Total: </span>
+                                <div className="box-valuePayment">
+                                    <span className="text-valueNum">R$ {configPay.value.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
+                                    <span className="text-valueSplitTime">{splitTime}x de {(configPay.value / parseInt(splitTime)).toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div className="container-informationRequestPayment">
+                            <div className="box-content-informationPayment">
+                                <div className="box-showInformation style-clock">
+                                    <img src={clockIcon} alt="Time" />
+                                    <span className="text-information">{configPay.timePreparing} min</span>
+                                </div>
+                            </div>
+                            <div className="box-content-informationPayment">
+                                <div className="box-showInformation style-dist">
+                                    <img src={distIcon} alt="Time" />
+                                    <span className="text-information">{configPay.timeMove} min</span>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <button onClick={(e) => createPay()} className="button-finishPurchase">Finalizar</button>
+                    </>
+                ) : (
+                    <div className="container-logInMove">
+                        <span className="text-WarningLogin">Login</span>
+                        <span className="text-subWarningLogin">Faça login para adicionar produtos a sua lista e personalizar sua conta do seu jeito</span>
+                        <Link to="/login"><button className="button-warningLogin">Fazer Login</button></Link>
                     </div>
-                </div>
+                )}
 
-                <button onClick={(e) => createPay()} className="button-finishPurchase">Finalizar</button>
 
             </main>
         </>

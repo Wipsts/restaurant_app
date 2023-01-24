@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import InputMask from 'react-input-mask';
+import {informationUser} from "../module/main"
 
 import Header from "../module/components/Header";
 import Navegation from "../module/components/Navegation";
@@ -8,12 +10,58 @@ import LockIcon from "../images/icon/LockIcon.svg"
 import "../style/min/MyAccount.scss";
 
 const InputMaskCPF = (props) => (
-    <InputMask mask="999.999.999-99" placeholder={props.placeholder} className={props.className} value={props.value} onChange={props.onChange}></InputMask>
+    <InputMask mask="999.999.999-99" disabled placeholder={props.placeholder} className={props.className} value={props.value} onChange={props.onChange}></InputMask>
   );
 
 function MyAccount(props){
+    const [Inputuser, setInputUser] = useState({id: "", name: "", email: "", date: "", cod: ""})
     const [user, setUser] = useState({id: "", name: "", email: "", date: "", cod: ""})
+    const navigate = useNavigate();
 
+    function constructUser(){
+        new informationUser().getInformationUser(Response => {
+            const date =  (Response.data.birthday).split("/")
+            const birthday = (date[0]) ? `${date[2]}-${date[1]}-${date[0]}` : date
+            const set = {
+                id: Response.id, 
+                name: Response.data.name, 
+                email: Response.data.email, 
+                date: birthday, 
+                cod: Response.data.cpf
+            }
+
+            setUser(set)            
+            setInputUser(set)            
+        })
+    }
+
+    function updateInformationUser(){
+        if(user.name !== Inputuser.name || user.date !== Inputuser.date){
+            new informationUser().updateInformationUser(user.id, Inputuser.name, Inputuser.date, Response => {
+                if(Response){}else{
+                    setInputUser(prevState => {return {
+                        prevState,
+                        name: user.name,
+                        date: user.date
+                    }})
+                }
+            })
+        }
+    }
+
+    function logOut(){
+        new informationUser().logoutUser(Response => {
+            if(Response){
+                navigate("/login")
+            }else{
+                navigate("/")
+            }
+        })
+    }
+
+    useEffect(() => {
+        constructUser()
+    },[])
 
     return (
         <>
@@ -26,19 +74,19 @@ function MyAccount(props){
                     <div className="container-interactiveUserInformationAccount">
                         <div className="box-inputInformation">
                             <span className="text-describeInput">E-mail</span>
-                            <input type="email" placeholder="E-mail" className="input-Information" value={user.email} onChange={(e) => {setUser(prevState => {return {...prevState, email: e.target.value}})}}/>
+                            <input type="email" placeholder="E-mail" disabled className="input-Information" value={Inputuser.email}/>
                         </div>
                         <div className="box-inputInformation">
                             <span className="text-describeInput">Nome</span>
-                            <input type="text" placeholder="Nome" className="input-Information" value={user.name} onChange={(e) => {setUser(prevState => {return {...prevState, name: e.target.value}})}}/>
+                            <input type="text" placeholder="Nome" className="input-Information" value={Inputuser.name} onFocus={(e) => updateInformationUser()} onChange={(e) => {setInputUser(prevState => {return {...prevState, name: e.target.value}})}}/>
                         </div>
                         <div className="box-inputInformation">
                             <span className="text-describeInput">Data de Nacimento</span>
-                            <input type="date" className="input-Information" value={user.date} onChange={(e) => {setUser(prevState => {return {...prevState, date: e.target.value}})}}/>
+                            <input type="date" className="input-Information" value={Inputuser.date} onFocus={(e) => updateInformationUser()} onChange={(e) => {setInputUser(prevState => {return {...prevState, date: e.target.value}})}}/>
                         </div>
                         <div className="box-inputInformation">
                             <span className="text-describeInput">CPF</span>
-                            <InputMaskCPF placeholder="000.000.000-00" className="input-Information" value={user.cod} onChange={(e) => {setUser(prevState => {return {...prevState, cod: e.target.value}})}}/>
+                            <InputMaskCPF placeholder="000.000.000-00" disabled className="input-Information" value={Inputuser.cod}/>
                         </div>
                     </div>
                 </div>
@@ -48,6 +96,7 @@ function MyAccount(props){
                         Opções de pagamento
                         <img src={LockIcon} alt="" />
                     </button>
+                    <button className="button-payOptions style-logout" onClick={(e) => logOut()}>Desconectar</button>
                 </div>
 
                 <div className="container-warning">

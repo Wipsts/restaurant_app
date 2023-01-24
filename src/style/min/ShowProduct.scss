@@ -96,9 +96,13 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+}
 
-    border: .5px solid #127973; 
-    // apenas quando tiver alguma observação escrita
+.style-selectObservationRequest{
+    background-color: #1DC4BC;
+    img{
+        filter: invert(99%) sepia(3%) saturate(243%) hue-rotate(279deg) brightness(116%) contrast(100%) !important;
+    }
 }
 
 .button-observation img{
