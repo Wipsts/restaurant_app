@@ -12,11 +12,15 @@ import "../style/min/HistoryRequest.scss";
 function HistoryRequest(props){
     const [historic, setHistoric] = useState([])
     const [pending, setPending] = useState()
+    const [userIsLog, setUserIsLog] = useState(false)
 
     function getInformationHistoric(){
         new getHistoric().get(Response => {
             setHistoric(Response.historic)
             setPending(Response.pending)
+        })
+        new userLog().init(Response => {
+            setUserIsLog(Response)
         })
     }
 
@@ -30,13 +34,12 @@ function HistoryRequest(props){
 
             <main>
                 <SeachBox/>
-                {(new userLog().init()) ? (
+                {(userIsLog) ? (
                     <>
                         <div className="container-nav">
-
                             <div className="container-pending">
                                 <span className="text-subTextrequest">Pendente</span>
-                                {pending ? (
+                                {(pending && pending[0]) ? (
                                     <div className="container-content-request">
                                         <div className="box-informationRequest">
                                             <span className="text-date-request">{pending.date}</span>

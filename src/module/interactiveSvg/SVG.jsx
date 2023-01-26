@@ -59,9 +59,7 @@ class SVGCreateClass extends Component{
     }
 
     componentDidMount() {
-        // example useEffect(()=>{},[])
         this.blockTablesWithOptions()
-        // TODO bloquear if [1,0] --- criança/deficiente
     }
 
     blockTablesWithOptions(){

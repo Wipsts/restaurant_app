@@ -17,6 +17,7 @@ function OrderList(props){
     const [listUser, setListUser] = useState([])
     const [configList, setConfigList] = useState({totalValue: "0,00"})
     const [removeProductRef, setRemoveProductRef] = useState({id: "", remove: null})
+    const [userIsLog, setUserIsLog] = useState(false)
     const navigate = useNavigate();
     
     function listProductList(){
@@ -44,10 +45,7 @@ function OrderList(props){
         return productList
     }
 
-    function removeProduct(idRemove){
-        // TODO criar em classe separada
-
-    
+    function removeProduct(idRemove){    
         if(idRemove){
             if(removeControler(idRemove)){
                 new manageProduct().removeToList(idRemove, listUser, Response => {
@@ -76,12 +74,14 @@ function OrderList(props){
     }
 
     function requestPay(){
-        // TODO gerar token e request pay
         navigate("/pay")
     }
 
     useEffect(() => {
         listProductList()
+        new userLog().init(Response => {
+            setUserIsLog(Response)
+        })
     }, []);
 
     return (
@@ -91,7 +91,7 @@ function OrderList(props){
             <main>
                 <SeachBox/>
 
-                {(new userLog().init()) ? (
+                {(userIsLog) ? (
                     <>
                         <div className="content-Product style-orderList">
                             <div className="box-Products">

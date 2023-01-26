@@ -1,5 +1,4 @@
 import {QUERY, getUser} from "../main"
-
 class manageProduct{
     getDataUser(uiD, res){    
         if(sessionStorage.getItem('tagsIdsResponseUser') && JSON.parse(sessionStorage.getItem('tagsIdsResponseUser')).idUser === uiD){
@@ -49,32 +48,36 @@ class manageProduct{
 
     addToList(product, descriptionProduct, res){
         getUser(tokenUid => {
-            this.getDataUser(tokenUid, dataUser => {
-                this.getListUser(dataUser.idList, "add", dataList => {
-                    const ProductList = dataList.data.product
-                    const descriptionProductList = dataList.data.description
-                    const newValueProduct =  parseFloat(dataList.data.totalVal) + parseFloat(product.data.val) 
-                    ProductList.push(product.id)      
-                    descriptionProductList.push(descriptionProduct)              
-                    descriptionProduct = (descriptionProduct !== "") ? descriptionProduct : ""
-
-                    const queryUpdate = {
-                        "id": dataUser.idList,
-                        "data": {
-                            "product": ProductList,
-                            "totalVal": newValueProduct,
-                            "description": descriptionProductList
+            if(tokenUid){
+                this.getDataUser(tokenUid, dataUser => {
+                    this.getListUser(dataUser.idList, "add", dataList => {
+                        const ProductList = dataList.data.product
+                        const descriptionProductList = dataList.data.description
+                        const newValueProduct =  parseFloat(dataList.data.totalVal) + parseFloat(product.data.val) 
+                        ProductList.push(product.id)      
+                        descriptionProductList.push(descriptionProduct)              
+                        descriptionProduct = (descriptionProduct !== "") ? descriptionProduct : ""
+    
+                        const queryUpdate = {
+                            "id": dataUser.idList,
+                            "data": {
+                                "product": ProductList,
+                                "totalVal": newValueProduct,
+                                "description": descriptionProductList
+                            }
                         }
-                    }
-                    this.updateListUser(queryUpdate, responseResult => {
-                        if(responseResult){
-                            sessionStorage.setItem('listOrderUser', JSON.stringify({totalValue: newValueProduct, list: JSON.stringify(ProductList)}));
-                        }
-
-                        res(responseResult)
+                        this.updateListUser(queryUpdate, responseResult => {
+                            if(responseResult){
+                                sessionStorage.setItem('listOrderUser', JSON.stringify({totalValue: newValueProduct, list: JSON.stringify(ProductList)}));
+                            }
+    
+                            res(responseResult)
+                        })
                     })
-                })
-            })            
+                })            
+            }else{
+                window.location.href = "/login"
+            }
         })
     }
 
@@ -101,7 +104,7 @@ class manageProduct{
                     const newProductList = returnRemoved.dataList
                     const newDescriptionProduct = removeDescriptionList(returnRemoved.positionProductRemoved, dataList.data.description)
                     const newValueProduct = getNewValueProduct(newProductList)
-
+    
                     const queryUpdate = {
                         "id": dataUser.idList,
                         "data": {

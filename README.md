@@ -76,6 +76,7 @@ git fetch origin
 git branch -u origin/master master
 git remote set-head origin -a
 
+git commit -m "Primeiro commit"
 # login fireBaseCode
 
 firebase login

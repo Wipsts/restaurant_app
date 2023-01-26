@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Header from "../module/components/Header";
 import {getCookie, registreUser} from "../module/main"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import siteIcon from "../images/icon/siteIcon.svg"
 import lockIcon from "../images/icon/LockIcon.svg"
 import userIcon from "../images/icon/userIcon.svg"
+import googleIcon from "../images/img/googleIcon.png"
+import appleIcon from "../images/img/appleIcon.png"
+import instagramIcon from "../images/img/instagramIcon.png"
+
 import "../style/min/Login.scss"
 
 function Login(props){
@@ -14,6 +19,7 @@ function Login(props){
     const [configPage, setConfigPage] = useState({protocol: [0,1]})
     const [warning, setWarning] = useState({display: "none", text: ""})
     const [sendOtherEmailTime, setSendOtherEmailTime] = useState("01:30")
+    const navigate = useNavigate();
 
     function registre(e){
         e.preventDefault()
@@ -107,8 +113,17 @@ function Login(props){
     }
 
     function registreAuthenticate(form){
-        // 0 => google | 1 => apple | 2 => instagram
-        new registreUser().registreAutheticate(form)
+        new registreUser().registreAutheticate(form, Respose => {
+            if(Respose.login){
+                navigate("/orderList")
+            }else{
+                if(Respose.why && Respose.why === "notSupported"){
+                    setWarning({display: "block", text: `Ah não! estamos trabalhando para concluir esta implementação.`})
+                }else{
+                    setWarning({display: "block", text: `Ah não! não conseguimos nos conectar com os servidores de autenticação, tente novamente mais tarde.`})
+                }
+            }
+        })
     }
 
     function pageSelectWithHistory(){
@@ -150,9 +165,9 @@ function Login(props){
                 {configPage.protocol[0] ? (
                     <div className="container-protocol">
                         <div className="container-authenticateLogin">
-                            <div onClick={(e) => registreAuthenticate(0)} className="box-authenticator" id="login_google"><img src="" alt="" /></div>
-                            <div onClick={(e) => registreAuthenticate(1)} className="box-authenticator" id="login_apple"><img src="" alt="" /></div>
-                            <div onClick={(e) => registreAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src="" alt="" /></div>
+                            <div onClick={(e) => registreAuthenticate(0)} className="box-authenticator" id="login_google"><img src={googleIcon} alt="" /></div>
+                            <div onClick={(e) => registreAuthenticate(1)} className="box-authenticator" id="login_apple"><img src={appleIcon} alt="" /></div>
+                            <div onClick={(e) => registreAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src={instagramIcon} alt="" /></div>
                         </div>
 
                         <div className="container-loginDefault container-registreDefault">

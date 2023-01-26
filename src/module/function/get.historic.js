@@ -15,7 +15,6 @@ class getHistoric{
     }
 
     getHistoricUser(idTag, res){
-        // TODO Otimizar (para não fazer tantas requisoes)
         if(sessionStorage.getItem('historicData') && JSON.parse(sessionStorage.getItem('historicData'))[0]){
             const historic = JSON.parse(sessionStorage.getItem('historicData'))
             res(historic)
@@ -35,7 +34,6 @@ class getHistoric{
             res(tags)
         }else{
             QUERY('getEspecific', {'bd': "user", 'where': ['token', uiD]}, 1, response => {
-                console.log(response)
                 const tags = {
                     "idHistoric": (response.data.idHistoric) ? response.data.idHistoric : response.data.idHstoric,
                     "idList": response.data.idList,

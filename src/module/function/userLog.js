@@ -1,18 +1,13 @@
-import {getCookie} from './cookie';
+import {getUser} from '../main';
 class userLog{
-    // TODO modificar para atenticação com firebase
-    init(){
-        if(getCookie("USER.LOGIN")){
-            // TODO autenticação com o firebase/auth
-            const valUserCookie = getCookie("USER.LOGIN")
-            if(valUserCookie){
-                return true
+    init(res){   
+        getUser(Response => {
+            if(Response){
+                res(true)
             }else{
-                return false
+                res(false)
             }
-        }else{
-            return false;
-        }
+        })     
     }
 }
 

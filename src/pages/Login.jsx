@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../module/components/Header";
+import googleIcon from "../images/img/googleIcon.png"
+import appleIcon from "../images/img/appleIcon.png"
+import instagramIcon from "../images/img/instagramIcon.png"
 import "../style/min/Login.scss"
 
 import {authenticateLogin} from "../module/main.js"
@@ -33,8 +36,17 @@ function Login(props){
     }
 
     function loginAuthenticate(form){
-        // 0 => google | 1 => apple | 2 => instagram
-        new authenticateLogin().loginWithAuthenticate(form)
+        new authenticateLogin().loginWithAuthenticate(form, Respose => {
+            if(Respose.login){
+                navigate("/orderList")
+            }else{
+                if(Respose.why && Respose.why === "notSupported"){
+                    setWarning({display: "block", text: `Ah não! estamos trabalhando para concluir esta implementação.`})
+                }else{
+                    setWarning({display: "block", text: `Ah não! não conseguimos nos conectar com os servidores de autenticação, tente novamente mais tarde.`})
+                }
+            }
+        })
     }
 
     return (
@@ -42,9 +54,9 @@ function Login(props){
             <Header type={1} page="Login" link={"/"}/>
             <main className='main_login'>
                 <div className="container-authenticateLogin">
-                    <div onClick={(e) => loginAuthenticate(0)} className="box-authenticator" id="login_google"><img src="" alt="" /></div>
-                    <div onClick={(e) => loginAuthenticate(1)} className="box-authenticator" id="login_apple"><img src="" alt="" /></div>
-                    <div onClick={(e) => loginAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src="" alt="" /></div>
+                    <div onClick={(e) => loginAuthenticate(0)} className="box-authenticator" id="login_google"><img src={googleIcon} alt="" /></div>
+                    <div onClick={(e) => loginAuthenticate(1)} className="box-authenticator" id="login_apple"><img src={appleIcon} alt="" /></div>
+                    <div onClick={(e) => loginAuthenticate(2)} className="box-authenticator" id="login_instagram"><img src={instagramIcon} alt="" /></div>
                 </div>
 
                 <div className="container-loginDefault">

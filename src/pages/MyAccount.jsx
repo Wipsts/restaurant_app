@@ -10,7 +10,7 @@ import LockIcon from "../images/icon/LockIcon.svg"
 import "../style/min/MyAccount.scss";
 
 const InputMaskCPF = (props) => (
-    <InputMask mask="999.999.999-99" disabled placeholder={props.placeholder} className={props.className} value={props.value} onChange={props.onChange}></InputMask>
+    <InputMask mask="999.999.999-99" disabled placeholder={props.placeholder} className={props.className} value={props.value}></InputMask>
   );
 
 function MyAccount(props){
@@ -20,8 +20,8 @@ function MyAccount(props){
 
     function constructUser(){
         new informationUser().getInformationUser(Response => {
-            const date =  (Response.data.birthday).split("/")
-            const birthday = (date[0]) ? `${date[2]}-${date[1]}-${date[0]}` : date
+            const date =  (Response.data.birthday) ? (Response.data.birthday).split("/") : ""
+            const birthday = (date[1]) ? `${date[2]}-${date[1]}-${date[0]}` : date[0]
             const set = {
                 id: Response.id, 
                 name: Response.data.name, 
@@ -36,7 +36,7 @@ function MyAccount(props){
     }
 
     function updateInformationUser(){
-        if(user.name !== Inputuser.name || user.date !== Inputuser.date){
+        if(user.name !== Inputuser.name || (user.date !== Inputuser.date && isString(Inputuser.date)) ){
             new informationUser().updateInformationUser(user.id, Inputuser.name, Inputuser.date, Response => {
                 if(Response){}else{
                     setInputUser(prevState => {return {
@@ -46,6 +46,10 @@ function MyAccount(props){
                     }})
                 }
             })
+        }
+
+        function isString(value){
+            return typeof value === 'string'
         }
     }
 

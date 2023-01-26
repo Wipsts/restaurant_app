@@ -1,0 +1,13 @@
+
+TODO CODE: 
+    - show and list tables in Pay.jsx
+    - bar search function
+    - show and list card in Pay.jsx
+    - create function to add request pendent in Pay.jsx
+    - update function (user is log [userLog.js]) for login firebase auth
+    - fix birthday value in MyAccount.jsx input
+TODO Design: 
+    - design manager page
+    - design boss page
+    - design waiter page
+    

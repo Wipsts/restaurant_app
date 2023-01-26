@@ -25,7 +25,6 @@ function Main({tables, onClick}){
                 <g id="group-tablesSVG">
                     {tables.map((table, i) => {
                         const color = setColor(table.status)
-                        // TODO criar variantes das mesas (vertical e horizontal)
                         if(table.tableSelect === "T2"){
                             return <Table2 onClick={onClick} key={i} id={table.idTable} position={table.position} color={color}/>
                         }else if(table.tableSelect === "T4"){

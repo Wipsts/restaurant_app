@@ -10,12 +10,17 @@ import userIcon from "../../images/icon/userIcon.svg"
 class NavegationPage extends Component {
     constructor(props){
         super()
+        this.state = {
+            typeLog: "/login"
+        }
     }
 
-    userIsLog(){
-        return (new userLog().init() ? "/account" : "/login" )
+    componentDidMount() {
+        new userLog().init(Response => {
+            this.setState({typeLog: Response ? "/account" : "/login"})
+        })
     }
-    
+
     render(){
         return (
             <>
@@ -23,7 +28,7 @@ class NavegationPage extends Component {
                     <Link to="/"><span className="Menu-option syle-menu">Menu</span></Link>
                     <Link to="/orderList"><img src={orderedIcon} alt="" className="Menu-option" /></Link>
                     <Link to="/historyRequest"><img src={historyIcon} alt="" className="Menu-option" /></Link>
-                    <Link to={this.userIsLog()}><img src={userIcon} alt="" className="Menu-option" /></Link>
+                    <Link to={this.state.typeLog}><img src={userIcon} alt="" className="Menu-option" /></Link>
                </nav>
             </>
         )

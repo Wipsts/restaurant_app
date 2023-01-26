@@ -1,10 +1,9 @@
 import { collection, addDoc} from "firebase/firestore";
 
-async function addData(data, db, res) {
-    // TODO / fazer tratamento de error (if exist data.insertdata)
-    
+async function addData(data, db, res) {    
     if(!data.insert_data){
         res(["error", "data is not valid"])
+        return
     }
 
     const dataCollectionRef = collection(db, data.bd);

@@ -1,9 +1,29 @@
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import {setCookie} from "../main"
+import loginAuthenticateWithApi from "./login.authenticate.api"
 class authenticateLogin{
-    loginWithAuthenticate(authenticate){
-        // TODO authenticate
-
+    loginWithAuthenticate(authenticate, res){
+        if(authenticate === 0){
+            new loginAuthenticateWithApi().GoogleAuth(Response => {
+                if(Response.login){
+                    setCookie("USER.LOGIN", Response.token, 31)
+                    res({login: true})
+                }else{
+                    console.error(Response.why)
+                }
+            })
+        }else if(authenticate === 1){
+            res({login: false, why: "notSupported"})
+        }else{
+            new loginAuthenticateWithApi().FacebookAuth(Response => {
+                if(Response.login){
+                    setCookie("USER.LOGIN", Response.token, 31)
+                    res({login: true})
+                }else{
+                    console.error(Response.why)
+                }
+            })
+        }
     }
 
     logUser(email, password, res){        
@@ -35,6 +55,7 @@ class authenticateLogin{
         setCookie("USER.LOGIN", null, -999999)
         localStorage.removeItem("historicData");
         localStorage.removeItem("tagsIdsResponseUser");
+        localStorage.removeItem("listOrderUser");
     }
 
     logOut(res){

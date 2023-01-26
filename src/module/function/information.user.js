@@ -28,7 +28,6 @@ class informationUser{
             }
         }
         QUERY('update', {'bd': "user", 'update': query}, "null", response => {
-            console.log("here")
             res(response)
         })
     }
